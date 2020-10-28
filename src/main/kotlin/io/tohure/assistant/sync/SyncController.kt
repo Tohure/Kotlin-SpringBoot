@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 
 @RestController
-class DemoController {
+class SyncController {
 
     val endpoint = "https://gturnquist-quoters.cfapps.io/api/random"
 
@@ -23,7 +23,7 @@ class DemoController {
        return Demo(name, 7)
     }
 
-    @GetMapping("/rest")
+    @GetMapping("/sync")
     fun printRestDemo(): DemoQuote? {
 
         val quote = restTemplate.getForObject(endpoint, DemoQuote::class.java)

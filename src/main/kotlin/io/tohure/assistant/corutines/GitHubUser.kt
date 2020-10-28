@@ -1,4 +1,4 @@
-package io.tohure.assistant.async
+package io.tohure.assistant.corutines
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 

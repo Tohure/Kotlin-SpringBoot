@@ -1,12 +1,13 @@
-package io.tohure.assistant.async
+package io.tohure.assistant.corutines
 
+import kotlinx.coroutines.coroutineScope
 import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class DemoAsyncController {
+class CoroutineController {
 
     @Autowired
     lateinit var gitHubLookupService: GitHubLookupService
@@ -14,9 +15,9 @@ class DemoAsyncController {
     @Autowired
     lateinit var log: Logger
 
-    @GetMapping("/async")
-    fun printAsyncDemo(): GitHubUser? {
-        log.info("Llamada async")
-        return gitHubLookupService.findUser().get()
+    @GetMapping("/coroutine")
+    suspend fun printCorouDemo(): GitHubUser? = coroutineScope {
+        log.info("Llamada coroutine")
+        return@coroutineScope gitHubLookupService.findUser()
     }
 }
