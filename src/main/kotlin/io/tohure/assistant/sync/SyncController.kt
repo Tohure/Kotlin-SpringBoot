@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 
 @RestController
-class DemoController {
+class SyncController {
 
     val endpoint = "https://gturnquist-quoters.cfapps.io/api/random"
 
@@ -19,17 +19,13 @@ class DemoController {
     lateinit var log: Logger
 
     @GetMapping("/demo")
-    fun printDemo(@RequestParam(value = "name", defaultValue = "Tohure") name: String) : Demo {
-       return Demo(name, 7)
+    fun printDemo(@RequestParam(value = "name", defaultValue = "Tohure") name: String) : DemoModel {
+       return DemoModel(name, 7)
     }
 
-    @GetMapping("/rest")
-    fun printRestDemo(): DemoQuote? {
-
-        val quote = restTemplate.getForObject(endpoint, DemoQuote::class.java)
-
-        log.info(quote.toString())
-
-        return quote
+    @GetMapping("/sync")
+    fun printRestDemo(): QuoteModel? {
+        log.info("Llamada sync")
+        return restTemplate.getForObject(endpoint, QuoteModel::class.java)
     }
 }
